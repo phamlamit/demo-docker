@@ -1,0 +1,12 @@
+# Stage 1: Build React app
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY hoidanit-frontend-reactjs/package*.json ./
+RUN npm install
+COPY hoidanit-frontend-reactjs/ ./
+RUN npm run build
+
+# Stage 2: Serve with nginx
+FROM nginx:1.23.3
+COPY --from=builder /app/build /usr/share/nginx/html
+COPY production/default.conf /etc/nginx/conf.d/default.conf
