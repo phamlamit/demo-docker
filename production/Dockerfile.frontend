@@ -2,6 +2,7 @@
 FROM node:14-alpine AS builder
 WORKDIR /app
 COPY hoidanit-frontend-reactjs/package*.json ./
+RUN sed -i 's/"react-markdown-editor-lite": "\^1\.3\.0"/"react-markdown-editor-lite": "1.3.0"/' package.json
 RUN npm install --legacy-peer-deps
 COPY hoidanit-frontend-reactjs/ ./
 RUN npm run build
