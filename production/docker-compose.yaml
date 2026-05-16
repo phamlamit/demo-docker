@@ -46,5 +46,7 @@ services:
       dockerfile: production/Dockerfile.frontend
     ports:
       - 80:80
+    depends_on:
+      - backend
 
 # docker compose -p hoidanit-sern up -d
